@@ -19,3 +19,7 @@ async function seed() {
     await createPlaylistTrack(playlistId, i);
   }
 }
+///Update the seed file to additionally seed at least 2 users. 
+// Each user should have a playlist containing at least 5 tracks. 
+// You will have to edit how playlists are seeded as well, 
+// since they now are required to belong to a user!
