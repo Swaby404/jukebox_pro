@@ -12,7 +12,7 @@ export async function createPlaylist(name, description) {
     rows: [playlist],
   } = await db.query(sql, [name, description]);
   return playlist;
-}
+};
 
 export async function getPlaylists() {
   const sql = `
