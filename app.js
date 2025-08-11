@@ -1,21 +1,31 @@
 import express from "express";
 const app = express();
-export default app;
 
 import morgan from "morgan";
 
 import tracksRouter from "#api/tracks";
 import playlistsRouter from "#api/playlists";
+ 
+
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
+
  
 app.use("/tracks", tracksRouter);
 app.use("/playlists", playlistsRouter);
+import usersRouter from "#api/users";
 
-app.use((err, req, res, next) => {
+
+
+
+app.use("/users", usersRouter);
+
+app.use((err, _req, res, next) => {
   // A switch statement can be used instead of if statements
   // when multiple cases are handled the same way.
   switch (err.code) {
@@ -32,9 +42,11 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error(err);
+  res.status(500).send("Sorry! Something went wrong.");
   res.status(500).send("Sorry! Something went wrong.");
 });
 
+export default app;
 

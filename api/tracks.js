@@ -1,10 +1,17 @@
 import express from "express";
 const router = express.Router();
+export default router;
 
-import { getTracks, getTrackById } from "#db/queries/tracks";
+
+import { getTracks, getTrackById,  } from "#db/queries/tracks";
+import { getPlaylistsById } from "#db/queries/playlists";
+import { createPlaylistTrack } from "#db/queries/playlists_tracks";
+
+
+///GET /tracks/:id/playlists sends all playlists owned by the user that contain this track.
 
 router
-.route("/").get(async (_unused, res) => {
+.route("/").get(async (req, res) => {
   try {
     const tracks = await getTracks();
     res.send(tracks);
@@ -12,6 +19,7 @@ router
     res.status(500).send("Server error.");
   }
 });
+
 
 router.route("/:id").get(async (req, res) => {
   try {
@@ -23,4 +31,6 @@ router.route("/:id").get(async (req, res) => {
   }
 });
 
-export default router;
+ 
+
+ 
